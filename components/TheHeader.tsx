@@ -5,8 +5,8 @@ import Logo from "./Logo";
 
 const TheHeader = () => {
   return (
-    <header>
-      <Container className="flex items-center justify-between border-none py-0">
+    <header className="bg-white border border-b drop-shadow-md">
+      <Container className="flex items-center justify-between">
         <Link href="/">
           <Logo />
         </Link>

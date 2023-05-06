@@ -73,7 +73,12 @@ const RecipeForm = () => {
           required
           {...form.getInputProps("ingredient")}
         />
-        <FileInput required label="Image" {...form.getInputProps("image")} />
+        <FileInput
+          placeholder="Choose an image"
+          required
+          label="Image"
+          {...form.getInputProps("image")}
+        />
 
         <Textarea label="Description" {...form.getInputProps("description")} />
 
