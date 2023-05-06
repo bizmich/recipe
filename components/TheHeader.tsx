@@ -1,13 +1,16 @@
-import { Header, Navbar, Text } from "@mantine/core";
-
+import { Button, Container, Header, Navbar } from "@mantine/core";
+import Logo from "./Logo";
 
 const TheHeader = () => {
     return (
-        <Header height={5}>
-            <Navbar>
-                <Text>Home</Text>
-            </Navbar>
-        </Header>
+
+        <header className="flex items-center justify-between border-none py-0" >
+            <Logo />
+            <nav className="w-auto">
+                <Button>Add a dish</Button>
+            </nav>
+        </header>
+
     );
 }
 export default TheHeader;
