@@ -1,10 +1,12 @@
+import RecipeList from "@/components/Recipe/RecipeList";
+import { Container } from "@mantine/core";
 
 const Home = () => {
   return (
-    <div>
-
-    </div>
-  )
+    <Container py={100}>
+      <RecipeList />
+    </Container>
+  );
 };
 
-export default Home
+export default Home;

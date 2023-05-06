@@ -7,7 +7,9 @@ const TheHeader = () => {
   return (
     <header>
       <Container className="flex items-center justify-between border-none py-0">
-        <Logo />
+        <Link href="/">
+          <Logo />
+        </Link>
         <nav className="w-auto">
           <Link href="/add-recipe">
             <Button leftIcon={<IconPlus />}>Add a dish</Button>
