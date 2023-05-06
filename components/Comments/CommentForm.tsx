@@ -37,6 +37,7 @@ const CommentForm = () => {
         <Textarea
           required
           label="Comment"
+          placeholder="Add a comment"
           withAsterisk
           {...form.getInputProps("comment")}
         />
