@@ -38,7 +38,7 @@ interface CommentHtmlProps {
 export function CommentCard({ postedAt, body, author }: CommentHtmlProps) {
   const { classes } = useStyles();
   return (
-    <Paper withBorder radius="md" className={classes.comment}>
+    <Paper className={classes.comment}>
       <Group>
         <Avatar src={author.image} alt={author.name} radius="xl" />
         <div>

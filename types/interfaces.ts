@@ -6,5 +6,14 @@ export interface Recipe {
   ingredient: string[] | string;
   name: string;
   cookingTime: number;
-  comment?: string[];
+  comment?: Comment[];
+}
+
+export interface Comment {
+  commentedAt: string;
+  id: string;
+  name: string;
+  email: string;
+  comment: string;
+  userId: string;
 }
