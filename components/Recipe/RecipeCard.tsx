@@ -15,17 +15,21 @@ const RecipeCard = () => {
       </Card.Section>
 
       <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>Norway Fjord Adventures</Text>
+        <Text weight={500}>Борщ с говядиной</Text>
       </Group>
 
-      <List size={14}>
-        <List.Item>sdfd</List.Item>
-        <List.Item>sdfd</List.Item>
-        <List.Item>sdfd</List.Item>
+      <List size={14} className="line-clamp-4">
+        <List.Item>Говядина - 500 г</List.Item>
+        <List.Item>Свёкла - 1 шт.</List.Item>
+        <List.Item>Картофель - 2 шт.</List.Item>
+        <List.Item>Капуста белокочанная - 200 г</List.Item>
+        <List.Item>Морковь - 1 шт.</List.Item>
+        <List.Item>Лук репчатый - 1 шт.</List.Item>
+        <List.Item>Томатная паста - 1 ст. ложка</List.Item>
       </List>
 
       <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        Book classic tour now
+        Preview
       </Button>
     </Card>
   );

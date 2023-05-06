@@ -70,7 +70,7 @@ const RecipeForm = () => {
 
           <TextInput
             withAsterisk
-            label="Ingredient"
+            label="Ingredient  (separated by comma)"
             placeholder="Ingredient"
             required
             {...form.getInputProps("ingredient")}
