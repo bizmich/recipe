@@ -36,7 +36,7 @@ const RecipeForm = () => {
   return (
     <Paper className="w-full py-10 lg:w-1/3" shadow="xl" p={20}>
       <Title align="center" order={1} size={25} mb={25}>
-        Добавить блюду
+        Добавить блюдо
       </Title>
       <form
         className="space-y-3"

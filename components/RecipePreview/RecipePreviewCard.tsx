@@ -1,6 +1,8 @@
 import { Image, Card, Group, Badge, List, Button, Text } from "@mantine/core";
+import { useRouter } from "next/router";
 
 const RecipePreviewCard = () => {
+  const { push } = useRouter();
   return (
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -38,7 +40,14 @@ const RecipePreviewCard = () => {
         <List.Item>Томатная паста - 1 ст. ложка</List.Item>
       </List>
 
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+      <Button
+        variant="light"
+        onClick={() => push("/edit-recipe/4")}
+        color="blue"
+        fullWidth
+        mt="md"
+        radius="md"
+      >
         Edit
       </Button>
       <Button variant="filled" color="red" fullWidth mt="md" radius="md">
