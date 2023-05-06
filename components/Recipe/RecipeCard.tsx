@@ -1,5 +1,6 @@
 import { Badge, Button, Card, Group, List, Text } from "@mantine/core";
 import Image from "next/image";
+import Link from "next/link";
 
 const RecipeCard = () => {
   return (
@@ -27,10 +28,11 @@ const RecipeCard = () => {
         <List.Item>Лук репчатый - 1 шт.</List.Item>
         <List.Item>Томатная паста - 1 ст. ложка</List.Item>
       </List>
-
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        Preview
-      </Button>
+      <Link href="/recipe-preview/2" className="no-underline">
+        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+          Preview
+        </Button>
+      </Link>
     </Card>
   );
 };
