@@ -1,8 +1,16 @@
+import { Recipe } from "@/types/interfaces";
 import { Image, Card, Group, Badge, List, Button, Text } from "@mantine/core";
 import { useRouter } from "next/router";
+import useStore from "../react-query/state-management/store";
 
-const RecipePreviewCard = () => {
+const RecipePreviewCard = ({ data }: { data: Recipe }) => {
   const { push } = useRouter();
+  const deleteRecipe = useStore((s) => s.deleteRecipe);
+
+  const handleDelete = (id: string) => {
+    deleteRecipe(id);
+    push("/");
+  };
   return (
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -15,29 +23,24 @@ const RecipePreviewCard = () => {
 
       <Group position="apart" mt="md" mb="xs">
         <Text size="lg" weight={500}>
-          Борщ с говядиной
+          {data.name}
         </Text>
-        <Badge>10 minutes ago</Badge>
+        <Badge>{data.createdDate}</Badge>
       </Group>
 
       <Text weight={500}>Description</Text>
 
       <Text size="sm" color="dimmed">
-        With Fjord Tours you can explore more of the magical fjord landscapes
-        with tours and activities on and around the fjords of Norway
+        {data.description}
       </Text>
 
       <Text weight={500} mt={15}>
         Ingredients
       </Text>
       <List size={14} withPadding>
-        <List.Item>Говядина - 500 г</List.Item>
-        <List.Item>Свёкла - 1 шт.</List.Item>
-        <List.Item>Картофель - 2 шт.</List.Item>
-        <List.Item>Капуста белокочанная - 200 г</List.Item>
-        <List.Item>Морковь - 1 шт.</List.Item>
-        <List.Item>Лук репчатый - 1 шт.</List.Item>
-        <List.Item>Томатная паста - 1 ст. ложка</List.Item>
+        {data.ingredient?.map((i) => {
+          return <List.Item key={i}>{i}</List.Item>;
+        })}
       </List>
 
       <Button
@@ -50,7 +53,14 @@ const RecipePreviewCard = () => {
       >
         Edit
       </Button>
-      <Button variant="filled" color="red" fullWidth mt="md" radius="md">
+      <Button
+        variant="filled"
+        onClick={() => data.id && handleDelete(data?.id)}
+        color="red"
+        fullWidth
+        mt="md"
+        radius="md"
+      >
         Delete
       </Button>
     </Card>

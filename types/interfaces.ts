@@ -1,11 +1,11 @@
 export interface Recipe {
   createdDate: string;
   description: string;
-  id?: string | undefined;
+  id?: string;
   image: string | null;
-  ingredient: string[] | string;
+  ingredient: string[];
   name: string;
-  cookingTime: number;
+  cookingTime?: string;
   comment?: Comment[];
 }
 

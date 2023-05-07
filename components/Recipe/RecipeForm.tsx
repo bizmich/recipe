@@ -11,19 +11,21 @@ import {
 import { useForm } from "@mantine/form";
 import { useId } from "@mantine/hooks";
 import { IconClockHour10 } from "@tabler/icons-react";
+import useStore from "../react-query/state-management/store";
 
 const RecipeForm = () => {
   const uuid = useId();
+  const { postRecipe, recipe } = useStore();
+
+  console.log("recipe:", recipe);
 
   const form = useForm<Partial<Recipe>>({
     initialValues: {
       name: "",
-      cookingTime: 0,
+      cookingTime: "",
       description: "",
       ingredient: "",
       image: null,
-      createdDate: new Date().toISOString(),
-      comment: [],
     },
 
     validate: {
@@ -40,16 +42,23 @@ const RecipeForm = () => {
       </Title>
       <form
         className="space-y-3"
-        onSubmit={form.onSubmit((value) =>
-          console.log({
-            name: value.name,
-            cookingTime: value.cookingTime,
-            description: value.description,
-            ingredient: (value.ingredient as string)?.split(","),
-            image: value.image,
-            id: uuid,
-          })
-        )}
+        onSubmit={form.onSubmit((value) => {
+          console.log("value:", value);
+
+          if (value) {
+            postRecipe({
+              name: value.name as string,
+              cookingTime: value.cookingTime?.toString(),
+              description: value.description as string,
+              ingredient: (value.ingredient as string)?.split(","),
+              image: "asdfasdf",
+              id: uuid,
+              createdDate: new Date().toISOString(),
+            });
+          }
+
+          form.reset();
+        })}
       >
         <TextInput
           withAsterisk
