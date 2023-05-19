@@ -28,7 +28,7 @@ const RecipeForm = () => {
       name: "",
       cookingTime: 0,
       description: "",
-      ingredient: "",
+      ingredient: [],
       image: null,
     },
 
@@ -52,10 +52,6 @@ const RecipeForm = () => {
         className="space-y-3"
         onSubmit={form.onSubmit((value) => {
           console.log("value:", value);
-
-          uploadImage.mutate({
-            file: value?.image,
-          });
 
           form.reset();
           push("/");
