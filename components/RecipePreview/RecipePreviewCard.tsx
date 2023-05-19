@@ -1,7 +1,6 @@
 import { Recipe } from "@/types/interfaces";
-import { Image, Card, Group, Badge, List, Button, Text } from "@mantine/core";
+import { Badge, Button, Card, Group, Image, List, Text } from "@mantine/core";
 import { useRouter } from "next/router";
-import useStore from "../react-query/state-management/store";
 import { openModal } from "../Utils/DeleteConfirmAlert";
 
 const RecipePreviewCard = ({
@@ -41,9 +40,11 @@ const RecipePreviewCard = ({
         Ingredients
       </Text>
       <List size={14} withPadding>
-        {data.ingredient?.map((i) => {
-          return <List.Item key={i}>{i}</List.Item>;
-        })}
+        {
+          data?.ingredient?.map((i) => {
+            return <List.Item key={i}>{i}</List.Item>;
+          }) as string
+        }
       </List>
 
       <Button

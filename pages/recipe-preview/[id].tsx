@@ -25,8 +25,8 @@ function RecipePreviewPage() {
         {data && (
           <RecipePreviewCard onDelete={deleteRecipe.mutate} data={data} />
         )}
-        <CommentForm />
-        <CommentsList />
+        {data && <CommentForm id={data?.id} />}
+        {data && <CommentsList comments={data?.comments || []} />}
       </Container>
     </section>
   );

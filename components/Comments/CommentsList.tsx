@@ -1,7 +1,11 @@
 import { Paper, Title } from "@mantine/core";
 import { CommentCard } from "./CommentsCard";
+import { Comment } from "@/types/interfaces";
+import useDeleteComment from "../react-query/hooks/Comments/useDeleteComment";
 
-const CommentsList = () => {
+const CommentsList = ({ comments }: { comments: Comment[] }) => {
+  const deleteComment = useDeleteComment();
+
   return (
     <Paper
       maw="60%"
@@ -12,33 +16,26 @@ const CommentsList = () => {
       className="space-y-5"
     >
       <Title order={2}>Comments</Title>
-      <CommentCard
-        author={{
-          name: "Jacob Warnhalter",
-          image:
-            "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-        }}
-        postedAt="10 minutes ago"
-        body="I use Heroku to host my Node.js application, but MongoDB add-on appears to be too expensive. I consider switching to Digital Ocean VPS to save some cash."
-      />
-      <CommentCard
-        author={{
-          name: "Jacob Warnhalter",
-          image:
-            "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-        }}
-        postedAt="10 minutes ago"
-        body="I use Heroku to host my Node.js application, but MongoDB add-on appears to be too expensive. I consider switching to Digital Ocean VPS to save some cash."
-      />
-      <CommentCard
-        author={{
-          name: "Jacob Warnhalter",
-          image:
-            "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-        }}
-        postedAt="10 minutes ago"
-        body="I use Heroku to host my Node.js application, but MongoDB add-on appears to be too expensive. I consider switching to Digital Ocean VPS to save some cash."
-      />
+      {comments.length > 0 ? (
+        comments.map((com) => {
+          return (
+            <CommentCard
+              key={com.id}
+              author={{
+                name: com.name,
+              }}
+              id={com.id as string}
+              postedAt={com.commentedAt as string}
+              body={com.comment}
+              onDelete={deleteComment.mutate}
+            />
+          );
+        })
+      ) : (
+        <p className="py-10 text-center">
+          No comments yet, be the one to add first
+        </p>
+      )}
     </Paper>
   );
 };

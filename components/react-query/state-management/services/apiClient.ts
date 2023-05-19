@@ -20,7 +20,7 @@ class APIClient<T> {
   getById = (id: string) =>
     axiosInstance.get<T>(`${this.endpoint}/${id}`).then((res) => res.data);
 
-  post = (post: Recipe) =>
+  post = <D>(post: D) =>
     axiosInstance.post<T>(this.endpoint, post).then((res) => res.data);
 
   put = (id: string, post: Recipe) =>

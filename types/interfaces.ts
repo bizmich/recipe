@@ -7,19 +7,19 @@ export interface Recipe {
   description: string;
   createdDate?: string;
   image: string | null;
-  ingredient?: string[];
+  ingredient?: string[] | string;
   name: string;
   cookingTime: number;
-  comment?: Comment[];
+  comments?: Comment[];
   rate?: number;
   id?: string;
 }
 
 export interface Comment {
-  commentedAt: string;
-  id: string;
+  commentedAt?: string;
+  id?: string;
   name: string;
   email: string;
   comment: string;
-  userId: string;
+  recipeId: string;
 }
