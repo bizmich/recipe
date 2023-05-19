@@ -14,6 +14,7 @@ const RecipeList = () => {
           <RecipeCard
             key={rec.id}
             name={rec.name}
+            image={rec.image}
             id={rec.id}
             ingredient={rec.ingredient}
           />
