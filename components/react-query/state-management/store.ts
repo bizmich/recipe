@@ -21,7 +21,7 @@ const useStore = create<Store>()(
       putRecipe: (data) =>
         set({
           recipe: get().recipe.filter((r) =>
-            r.id == data.id ? { ...data } : r
+            r.id == data.id ? { ...r, ...data } : r
           ),
         }),
       //   addAFish: () => set({ fishes: get().fishes + 1 }),

@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
-import useStore from "../react-query/state-management/store";
+import useRecipeList from "../react-query/hooks/useRecipeList";
 import RecipeCard from "./RecipeCard";
-import { Recipe } from "@/types/interfaces";
 
 const RecipeList = () => {
-  const [recipe, setRecipe] = useState<Recipe[]>();
-  const remoteRecipe = useStore((s) => s.recipe);
-  useEffect(() => {
-    setRecipe(remoteRecipe);
-  }, [remoteRecipe]);
+  const { data, isLoading, error } = useRecipeList();
+
+  if (isLoading) return <p>Loading</p>;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <div className="grid grid-cols-3 gap-8">
-      {recipe?.map((rec) => {
+      {data?.list?.map((rec) => {
         return (
           <RecipeCard
             key={rec.id}

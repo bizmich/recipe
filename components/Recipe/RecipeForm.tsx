@@ -1,6 +1,7 @@
 import { Recipe } from "@/types/interfaces";
 import {
   Button,
+  FileButton,
   FileInput,
   NumberInput,
   Paper,
@@ -12,9 +13,12 @@ import { useForm } from "@mantine/form";
 import { useId } from "@mantine/hooks";
 import { IconClockHour10 } from "@tabler/icons-react";
 import useStore from "../react-query/state-management/store";
+import { useRouter } from "next/router";
+import useUploadImage from "../react-query/hooks/useUploadImage";
 
 const RecipeForm = () => {
   const uuid = useId();
+  const { push } = useRouter();
   const { postRecipe, recipe } = useStore();
 
   console.log("recipe:", recipe);
@@ -22,7 +26,7 @@ const RecipeForm = () => {
   const form = useForm<Partial<Recipe>>({
     initialValues: {
       name: "",
-      cookingTime: "",
+      cookingTime: 0,
       description: "",
       ingredient: "",
       image: null,
@@ -34,7 +38,11 @@ const RecipeForm = () => {
       image: (value) => (value !== null ? null : "pick an image"),
     },
   });
+  console.log(form.values);
 
+  const uploadImage = useUploadImage((image) => {
+    form.setValues((prev) => ({ ...prev, image: image.fileName }));
+  });
   return (
     <Paper className="w-full py-10 lg:w-1/3" shadow="xl" p={20}>
       <Title align="center" order={1} size={25} mb={25}>
@@ -45,21 +53,21 @@ const RecipeForm = () => {
         onSubmit={form.onSubmit((value) => {
           console.log("value:", value);
 
-          if (value) {
-            postRecipe({
-              name: value.name as string,
-              cookingTime: value.cookingTime?.toString(),
-              description: value.description as string,
-              ingredient: (value.ingredient as string)?.split(","),
-              image: "asdfasdf",
-              id: uuid,
-              createdDate: new Date().toISOString(),
-            });
-          }
+          uploadImage.mutate({
+            file: value?.image,
+          });
 
           form.reset();
+          push("/");
         })}
       >
+        <FileButton
+          {...form.getInputProps("image")}
+          accept="image/png,image/jpeg"
+          multiple
+        >
+          {(props) => <Button {...props}>Upload image</Button>}
+        </FileButton>
         <TextInput
           withAsterisk
           label="Name"
@@ -69,7 +77,7 @@ const RecipeForm = () => {
 
         <NumberInput
           icon={<IconClockHour10 />}
-          min={0}
+          min={1}
           label="Cooking time"
           placeholder="Cooking time"
           {...form.getInputProps("cookingTime")}
@@ -81,12 +89,6 @@ const RecipeForm = () => {
           placeholder="Ingredient"
           required
           {...form.getInputProps("ingredient")}
-        />
-        <FileInput
-          placeholder="Choose an image"
-          required
-          label="Image"
-          {...form.getInputProps("image")}
         />
 
         <Textarea label="Description" {...form.getInputProps("description")} />

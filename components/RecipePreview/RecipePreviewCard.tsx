@@ -2,15 +2,16 @@ import { Recipe } from "@/types/interfaces";
 import { Image, Card, Group, Badge, List, Button, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import useStore from "../react-query/state-management/store";
+import { openModal } from "../Utils/DeleteConfirmAlert";
 
-const RecipePreviewCard = ({ data }: { data: Recipe }) => {
+const RecipePreviewCard = ({
+  data,
+  onDelete,
+}: {
+  data: Recipe;
+  onDelete: (id: string) => void;
+}) => {
   const { push } = useRouter();
-  const deleteRecipe = useStore((s) => s.deleteRecipe);
-
-  const handleDelete = (id: string) => {
-    deleteRecipe(id);
-    push("/");
-  };
   return (
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -55,7 +56,11 @@ const RecipePreviewCard = ({ data }: { data: Recipe }) => {
       </Button>
       <Button
         variant="filled"
-        onClick={() => data.id && handleDelete(data?.id)}
+        onClick={() =>
+          openModal(() => {
+            onDelete(data.id as string);
+          })
+        }
         color="red"
         fullWidth
         mt="md"

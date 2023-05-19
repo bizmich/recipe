@@ -2,16 +2,18 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
 export interface Image {
-  fileName: string;
-  id: number;
-  link: string;
-  uploaded: boolean;
+  fileName?: string;
+  id?: number;
+  link?: string;
+  uploaded?: boolean;
 }
 
-const useUploadImage = (onSuccess: (image: Image) => {}) => {
-  return useMutation<Image, Error, FormData>({
-    mutationFn: (form: FormData) =>
-      axios
+const useUploadImage = (onSuccess: (image: Image) => void) => {
+  return useMutation<Image, Error, File>({
+    mutationFn: (file: File) => {
+      const form = new FormData();
+      form.append("upload", file);
+      return axios
         .post<Image>(
           "https://dev.api-parviz.com/api/uploads/upload-image",
           form,
@@ -22,10 +24,9 @@ const useUploadImage = (onSuccess: (image: Image) => {}) => {
             },
           }
         )
-        .then((res) => res.data),
-    onSuccess: (savedData: Image) => {
-      onSuccess(savedData);
+        .then((res) => res.data);
     },
+    onSuccess: (savedData) => onSuccess(savedData),
   });
 };
 
