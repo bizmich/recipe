@@ -11,6 +11,8 @@ const RecipePreviewCard = ({
   data: Recipe;
   onDelete: (id: string) => void;
 }) => {
+  console.log("data:", data);
+
   const { push } = useRouter();
   return (
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>

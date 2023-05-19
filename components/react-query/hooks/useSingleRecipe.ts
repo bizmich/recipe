@@ -1,15 +1,13 @@
 import { Recipe } from "@/types/interfaces";
-
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import APIClient from "../state-management/services/apiClient";
 
-const useSingleRecipe = (id: string | number | undefined) => {
+const apiClient = new APIClient<Recipe>("/api/recipe");
+
+const useSingleRecipe = (id: string) => {
   return useQuery<Recipe, Error>({
     queryKey: ["recipe-list"],
-    queryFn: () =>
-      axios
-        .get<Recipe>(`http://localhost:3001/recipe/${id}`)
-        .then((res) => res.data),
+    queryFn: () => apiClient.getById(id),
   });
 };
 export default useSingleRecipe;

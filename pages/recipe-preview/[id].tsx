@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 function RecipePreviewPage() {
   const router = useRouter();
   const { data, error, isLoading } = useSingleRecipe(
-    (router?.query?.id as string) || undefined
+    router?.query?.id as string
   );
 
   const deleteRecipe = useDeleteSingleRecipe(() => {

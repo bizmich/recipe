@@ -21,7 +21,7 @@ const RecipeEditPage = () => {
       name: "фываыв",
       cookingTime: 0,
       description: "",
-      ingredient: "",
+      ingredient: [],
       image: null,
       createdDate: new Date().toISOString(),
       comment: [],
@@ -46,16 +46,7 @@ const RecipeEditPage = () => {
         </Title>
         <form
           className="space-y-3"
-          onSubmit={form.onSubmit((value) =>
-            console.log({
-              name: value.name,
-              cookingTime: value.cookingTime,
-              description: value.description,
-              ingredient: (value.ingredient as string)?.split(","),
-              image: value.image,
-              id: uuid,
-            })
-          )}
+          onSubmit={form.onSubmit((value) => console.log(value))}
         >
           <TextInput
             withAsterisk
