@@ -7,7 +7,7 @@ const useRecipeList = () => {
     queryKey: ["recipe-list"],
     queryFn: () =>
       axios
-        .get<FetchResponse<Recipe>>("http://localhost:3001/recipe")
+        .get<FetchResponse<Recipe>>(`${process.env.BASE_URL}/api/recipe`)
         .then((res) => res.data),
   });
 };
