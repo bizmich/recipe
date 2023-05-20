@@ -1,8 +1,9 @@
+import { BASE_URL } from "./../../../../constants/constant.url";
 import { Recipe } from "@/types/interfaces";
 import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
