@@ -24,7 +24,7 @@ const RecipeEditPage = () => {
       ingredient: [],
       image: null,
       createdDate: new Date().toISOString(),
-      comment: [],
+      // comment: [],
     },
 
     validate: {

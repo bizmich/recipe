@@ -9,6 +9,7 @@ const nextConfig = {
       "images.unsplash.com",
       "plus.unsplash.com",
       "node-recipe-api-psi.vercel.app",
+      "localhost",
     ],
   },
 };

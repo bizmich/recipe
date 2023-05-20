@@ -17,7 +17,7 @@ const RecipePreviewCard = ({
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image
-          src="https://plus.unsplash.com/premium_photo-1663852297496-c427a58e98c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+          src={`${process.env.BASE_URL}/${data.image}`}
           height={350}
           alt="Norway"
         />
@@ -40,11 +40,10 @@ const RecipePreviewCard = ({
         Ingredients
       </Text>
       <List size={14} withPadding>
-        {
+        {Array.isArray(data.ingredient) &&
           data?.ingredient?.map((i) => {
             return <List.Item key={i}>{i}</List.Item>;
-          }) as string
-        }
+          })}
       </List>
 
       <Button

@@ -8,7 +8,7 @@ const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section component="a" href="https://mantine.dev/">
         <Image
-          src={`/${image || ""}`}
+          src={`${process.env.BASE_URL}/uploads/${image}`}
           height={160}
           width={320}
           alt="Norway"
@@ -23,9 +23,10 @@ const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
       </Group>
 
       <List size={14} className="line-clamp-4">
-        {/* {ingredient?.map((i, idx) => {
-          return <List.Item key={idx}>{i}</List.Item>;
-        })} */}
+        {Array.isArray(ingredient) &&
+          ingredient?.map((i, idx) => {
+            return <List.Item key={idx}>{i}</List.Item>;
+          })}
       </List>
       <Link href={`/recipe-preview/${id}`} className="no-underline">
         <Button variant="light" color="blue" fullWidth mt="md" radius="md">
