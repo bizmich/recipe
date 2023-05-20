@@ -6,13 +6,14 @@ export interface FetchResponse<T> {
 export interface Recipe {
   description: string;
   createdDate?: string;
-  image: string | null;
+  image: [] | string;
   ingredient?: string[] | string;
   name: string;
   cookingTime: number;
   comments?: Comment[];
   rate?: number;
   id?: string;
+  viewCount?: number;
 }
 
 export interface Comment {

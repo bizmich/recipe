@@ -4,7 +4,7 @@ import { Container, Title } from "@mantine/core";
 const Home = () => {
   return (
     <Container py={100}>
-      <Title mb={40}>Recipes</Title>
+      <Title mb={40}>Блюда</Title>
       <RecipeList />
     </Container>
   );

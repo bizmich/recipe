@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    BASE_URL: "https://node-recipe-api-psi.vercel.app",
+    BASE_URL: "http://localhost:5000",
   },
   reactStrictMode: true,
   images: {

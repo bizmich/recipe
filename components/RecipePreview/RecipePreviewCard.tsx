@@ -17,7 +17,7 @@ const RecipePreviewCard = ({
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image
-          src={`${process.env.BASE_URL}/${data.image}`}
+          src={`${process.env.BASE_URL}/uploads/${data.image}`}
           height={350}
           alt="Norway"
         />
@@ -25,7 +25,7 @@ const RecipePreviewCard = ({
 
       <Group position="apart" mt="md" mb="xs">
         <Text size="lg" weight={500}>
-          {data.name}
+          {data.name as string}
         </Text>
         <Badge>{data.createdDate}</Badge>
       </Group>

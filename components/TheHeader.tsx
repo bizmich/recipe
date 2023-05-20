@@ -10,11 +10,23 @@ const TheHeader = () => {
         <Link href="/">
           <Logo />
         </Link>
-        <nav className="w-auto">
-          <Link href="/add-recipe">
-            <Button leftIcon={<IconPlus />}>Add a dish</Button>
-          </Link>
-        </nav>
+        {/* <nav className="flex items-center w-auto gap-x-2">
+          <Button variant="light" compact color="white">
+            Блюдо мира
+          </Button>
+          <Button variant="light" compact color="white">
+            Блюдо мира
+          </Button>
+          <Button variant="light" compact color="white">
+            Блюдо мира
+          </Button>
+          <Button variant="light" compact color="white">
+            Блюдо мира
+          </Button>
+        </nav> */}
+        <Link href="/add-recipe">
+          <Button leftIcon={<IconPlus />}>Добавить блюдо</Button>
+        </Link>
       </Container>
     </header>
   );

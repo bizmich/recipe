@@ -18,11 +18,11 @@ const RecipeEditPage = () => {
 
   const form = useForm<Partial<Recipe>>({
     initialValues: {
-      name: "фываыв",
+      name: "",
       cookingTime: 0,
       description: "",
       ingredient: [],
-      image: null,
+      image: "",
       createdDate: new Date().toISOString(),
       // comment: [],
     },

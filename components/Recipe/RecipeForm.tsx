@@ -2,7 +2,6 @@ import { Recipe } from "@/types/interfaces";
 import {
   Button,
   FileButton,
-  FileInput,
   NumberInput,
   Paper,
   TextInput,
@@ -10,88 +9,87 @@ import {
   Title,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useId } from "@mantine/hooks";
 import { IconClockHour10 } from "@tabler/icons-react";
-import useStore from "../react-query/state-management/store";
 import { useRouter } from "next/router";
-import useUploadImage from "../react-query/hooks/useUploadImage";
+import useCreateRecipe from "../react-query/hooks/useCreateRecipe";
+import axios from "axios";
+import { UploadImage } from "../Utils/UploadImage";
 
-const RecipeForm = () => {
-  const uuid = useId();
+const RecipeFrom = () => {
   const { push } = useRouter();
-  const { postRecipe, recipe } = useStore();
 
-  console.log("recipe:", recipe);
+  const createRecipe = useCreateRecipe();
 
-  const form = useForm<Partial<Recipe>>({
+  const recipeFrom = useForm<Recipe>({
     initialValues: {
-      name: "",
-      cookingTime: 0,
       description: "",
+      cookingTime: 0,
+      name: "",
       ingredient: [],
-      image: null,
+      image: "",
     },
-
     validate: {
-      name: (value) => (value !== "" ? null : "Invalid name"),
-      description: (value) => (value !== "" ? null : "Invalid name"),
-      image: (value) => (value !== null ? null : "pick an image"),
+      name: (value) => (value !== "" ? null : "Пожалуйста введите имя"),
+      description: (value) =>
+        value !== "" ? null : "Пожалуйста добавьте описание",
+      image: (value) => (value !== "" ? null : "Пожалуйста выберите фото"),
+      ingredient: (value) =>
+        value?.length !== 0 ? null : "Пожалуйста добавьте ингридиенты",
+      cookingTime: (value) =>
+        value > 0 ? null : "Пожалуйста укажите время в минутах",
     },
   });
-  console.log(form.values);
 
-  const uploadImage = useUploadImage((image) => {
-    form.setValues((prev) => ({ ...prev, image: image.fileName }));
-  });
+  const handleSubmit = (value: Recipe) => {
+    const readyForm = new FormData();
+    if (value.image) readyForm.append("image", value.image[0]);
+    if (value.ingredient)
+      readyForm.append("ingredient", value.ingredient as string);
+    if (value.description) readyForm.append("description", value.description);
+    if (value.cookingTime)
+      readyForm.append("cookingTime", value.cookingTime.toString());
+    if (value.cookingTime) readyForm.append("name", value.name);
+
+    createRecipe.mutate(readyForm);
+  };
+
   return (
     <Paper className="w-full py-10 lg:w-1/3" shadow="xl" p={20}>
       <Title align="center" order={1} size={25} mb={25}>
         Добавить блюдо
       </Title>
-      <form
-        className="space-y-3"
-        onSubmit={form.onSubmit((value) => {
-          console.log("value:", value);
+      <form className="space-y-3" onSubmit={recipeFrom.onSubmit(handleSubmit)}>
+        <UploadImage file={recipeFrom} />
 
-          form.reset();
-          push("/");
-        })}
-      >
-        <FileButton
-          {...form.getInputProps("image")}
-          accept="image/png,image/jpeg"
-          multiple
-        >
-          {(props) => <Button {...props}>Upload image</Button>}
-        </FileButton>
         <TextInput
-          withAsterisk
-          label="Name"
-          placeholder="Your name"
-          {...form.getInputProps("name")}
+          label="Название"
+          placeholder="Название"
+          {...recipeFrom.getInputProps("name")}
         />
 
         <NumberInput
           icon={<IconClockHour10 />}
           min={1}
-          label="Cooking time"
+          label="Время приготовления"
           placeholder="Cooking time"
-          {...form.getInputProps("cookingTime")}
+          {...recipeFrom.getInputProps("cookingTime")}
         />
 
         <TextInput
           withAsterisk
-          label="Ingredient  (separated by comma)"
-          placeholder="Ingredient"
-          required
-          {...form.getInputProps("ingredient")}
+          label="Ингридиенты  (разделить запятой)"
+          placeholder="Ингридиенты"
+          {...recipeFrom.getInputProps("ingredient")}
         />
 
-        <Textarea label="Description" {...form.getInputProps("description")} />
+        <Textarea
+          label="Описание"
+          {...recipeFrom.getInputProps("description")}
+        />
 
         <div className="flex justify-end gap-x-3">
           <Button type="submit">Add</Button>
-          <Button type="button" onClick={() => form.reset()}>
+          <Button type="button" onClick={() => recipeFrom.reset()}>
             Reset
           </Button>
         </div>
@@ -100,4 +98,4 @@ const RecipeForm = () => {
   );
 };
 
-export default RecipeForm;
+export default RecipeFrom;
