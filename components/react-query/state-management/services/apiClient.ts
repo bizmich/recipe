@@ -24,8 +24,10 @@ class APIClient<T> {
   post = <D>(post: D, config?: AxiosRequestConfig) =>
     axiosInstance.post<T>(this.endpoint, post, config).then((res) => res.data);
 
-  put = (id: string, post: Recipe) =>
-    axiosInstance.put<T>(`${this.endpoint}/${id}`).then((res) => res.data);
+  put = (id: string, post: FormData, config?: AxiosRequestConfig) =>
+    axiosInstance
+      .put<T>(`${this.endpoint}/${id}`, post, config)
+      .then((res) => res.data);
 
   delete = (id: string) =>
     axiosInstance.delete(`${this.endpoint}/${id}`).then((res) => res.data);

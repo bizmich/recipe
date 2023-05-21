@@ -21,7 +21,7 @@ const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
           {name}
         </Text>
       </Group>
-      <List size={14} className="line-clamp-4">
+      <List size={14} className="h-24 line-clamp-4">
         {Array.isArray(ingredient) &&
           ingredient?.map((i, idx) => {
             return <List.Item key={idx}>{i}</List.Item>;

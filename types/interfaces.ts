@@ -6,7 +6,7 @@ export interface FetchResponse<T> {
 export interface Recipe {
   description: string;
   createdDate?: string;
-  image: [] | string;
+  image: Blob | string;
   ingredient?: string[] | string;
   name: string;
   cookingTime: number;

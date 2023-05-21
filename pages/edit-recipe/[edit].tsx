@@ -1,7 +1,11 @@
+import getCroppedImageUrl from "@/components/Utils/getCroppedImageUrl";
+import useSingleRecipe from "@/components/react-query/hooks/useSingleRecipe";
+import useUpdateRecipe from "@/components/react-query/hooks/useUpdateRecipe";
 import { Recipe } from "@/types/interfaces";
 import {
   Button,
   Container,
+  FileButton,
   FileInput,
   NumberInput,
   Paper,
@@ -10,23 +14,24 @@ import {
   Title,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useId } from "@mantine/hooks";
 import { IconClockHour10 } from "@tabler/icons-react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const RecipeEditPage = () => {
-  const uuid = useId();
+  const router = useRouter();
+  const updateRecipe = useUpdateRecipe(router?.query?.edit as string);
 
-  const form = useForm<Partial<Recipe>>({
+  const { data, isLoading } = useSingleRecipe(router?.query?.edit as string);
+
+  const form = useForm<Recipe>({
     initialValues: {
+      description: "",
       name: "",
       cookingTime: 0,
-      description: "",
-      ingredient: [],
       image: "",
-      createdDate: new Date().toISOString(),
-      // comment: [],
     },
-
     validate: {
       name: (value) => (value !== "" ? null : "Invalid name"),
       description: (value) => (value !== "" ? null : "Invalid name"),
@@ -34,6 +39,27 @@ const RecipeEditPage = () => {
     },
   });
 
+  const handleSubmit = (value: Recipe) => {
+    console.log("value:", value);
+
+    const readyForm = new FormData();
+    readyForm.append("image", value.image);
+    readyForm.append("ingredient", value.ingredient as string);
+    readyForm.append("description", value.description);
+    readyForm.append("cookingTime", value.cookingTime.toString());
+    readyForm.append("name", value.name);
+
+    updateRecipe.mutate(readyForm);
+  };
+
+  useEffect(() => {
+    if (data) {
+      form.setValues(data);
+      form.resetDirty(data);
+    }
+  }, [data]);
+
+  if (isLoading) return <p>Loading</p>;
   return (
     <Container
       py={120}
@@ -44,10 +70,27 @@ const RecipeEditPage = () => {
         <Title align="center" order={1} size={25} mb={25}>
           Изменить
         </Title>
-        <form
-          className="space-y-3"
-          onSubmit={form.onSubmit((value) => console.log(value))}
-        >
+        <form className="space-y-3" onSubmit={form.onSubmit(handleSubmit)}>
+          <div className="space-y-3">
+            <div>
+              {data && (
+                <Image
+                  src={getCroppedImageUrl(data?.image as string)}
+                  alt="image"
+                  className="rounded-lg"
+                  width={140}
+                  height={120}
+                />
+              )}
+            </div>
+            <FileButton
+              {...form.getInputProps("image")}
+              accept="image/png,image/jpeg"
+            >
+              {(props) => <Button {...props}>Загрузить фото</Button>}
+            </FileButton>
+          </div>
+
           <TextInput
             withAsterisk
             label="Name"
@@ -69,12 +112,6 @@ const RecipeEditPage = () => {
             placeholder="Ingredient"
             required
             {...form.getInputProps("ingredient")}
-          />
-          <FileInput
-            placeholder="Choose an image"
-            required
-            label="Image"
-            {...form.getInputProps("image")}
           />
 
           <Textarea

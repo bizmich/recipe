@@ -47,7 +47,7 @@ const RecipePreviewCard = ({
 
       <Button
         variant="light"
-        onClick={() => push("/edit-recipe/4")}
+        onClick={() => push(`/edit-recipe/${data.id}`)}
         color="blue"
         fullWidth
         mt="md"

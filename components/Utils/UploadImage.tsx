@@ -43,7 +43,7 @@ export function UploadImage({
     <div className={classes.wrapper}>
       <Dropzone
         openRef={openRef}
-        onDrop={(files) => file.setFieldValue("image", files as [])}
+        onDrop={(files) => file.setFieldValue("image", files[0])}
         className={classes.dropzone}
         radius="md"
         accept={IMAGE_MIME_TYPE}

@@ -9,12 +9,21 @@ import {
   Title,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconClockHour10 } from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconClockHour10 } from "@tabler/icons-react";
 import { UploadImage } from "../Utils/UploadImage";
 import useCreateRecipe from "../react-query/hooks/useCreateRecipe";
+import { notifications } from "@mantine/notifications";
 
 const RecipeFrom = () => {
-  const createRecipe = useCreateRecipe(() => recipeFrom.reset());
+  const createRecipe = useCreateRecipe(() => {
+    recipeFrom.reset();
+    notifications.show({
+      title: "Удачно",
+      message: "Блюдо добавлено!",
+      icon: <IconCircleCheckFilled />,
+      color: "green",
+    });
+  });
 
   const recipeFrom = useForm<Recipe>({
     initialValues: {
@@ -38,7 +47,7 @@ const RecipeFrom = () => {
 
   const handleSubmit = (value: Recipe) => {
     const readyForm = new FormData();
-    readyForm.append("image", value.image[0]);
+    readyForm.append("image", value.image);
     readyForm.append("ingredient", value.ingredient as string);
     readyForm.append("description", value.description);
     readyForm.append("cookingTime", value.cookingTime.toString());

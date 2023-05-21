@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ModalsProvider } from "@mantine/modals";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useRouter } from "next/router";
+import { Notifications } from "@mantine/notifications";
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Layout>
               <Component key={asPath} {...pageProps} />
             </Layout>
+            <Notifications />
           </ModalsProvider>
         </MantineProvider>
         <ReactQueryDevtools initialIsOpen={false} />
