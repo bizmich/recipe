@@ -32,9 +32,7 @@ const CommentsList = ({ comments }: { comments: Comment[] }) => {
           );
         })
       ) : (
-        <p className="py-10 text-center">
-          No comments yet, be the one to add first
-        </p>
+        <p className="py-10 text-center">Нет комментарии</p>
       )}
     </Paper>
   );
