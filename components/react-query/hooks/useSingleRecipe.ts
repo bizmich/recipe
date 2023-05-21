@@ -4,7 +4,7 @@ import APIClient from "../state-management/services/apiClient";
 
 const apiClient = new APIClient<Recipe>("/api/recipe");
 
-const useSingleRecipe = (id: string, deps: boolean) => {
+const useSingleRecipe = (id: string, deps?: boolean) => {
   return useQuery<Recipe, Error>({
     queryKey: ["recipe"],
     queryFn: () => apiClient.getById(id),

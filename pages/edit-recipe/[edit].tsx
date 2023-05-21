@@ -56,7 +56,6 @@ const RecipeEditPage = () => {
     readyForm.append("description", value.description);
     readyForm.append("cookingTime", value.cookingTime.toString());
     readyForm.append("name", value.name);
-
     updateRecipe.mutate(readyForm);
   };
 
