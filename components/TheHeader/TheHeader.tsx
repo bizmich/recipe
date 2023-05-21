@@ -1,7 +1,8 @@
 import { Button, Container } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
-import Logo from "./Logo";
+import Logo from "../Logo";
+import SearchBar from "./SearchBar/SearchBar";
 
 const TheHeader = () => {
   return (
@@ -24,9 +25,14 @@ const TheHeader = () => {
             Блюдо мира
           </Button>
         </nav> */}
-        <Link href="/add-recipe">
-          <Button leftIcon={<IconPlus />}>Добавить блюдо</Button>
-        </Link>
+        <div className="flex items-center gap-x-3">
+          <SearchBar />
+          <Link href="/add-recipe">
+            <Button radius="xl" leftIcon={<IconPlus />}>
+              Добавить блюдо
+            </Button>
+          </Link>
+        </div>
       </Container>
     </header>
   );

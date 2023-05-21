@@ -1,17 +1,17 @@
 import { ReactNode } from "react";
-import TheHeader from "../TheHeader";
+import TheHeader from "../TheHeader/TheHeader";
 
 interface LayoutProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-    return (
-        <>
-            <TheHeader />
-            <main>{children}</main>
-        </>
-    )
+  return (
+    <>
+      <TheHeader />
+      <main>{children}</main>
+    </>
+  );
 };
 
-export default Layout
+export default Layout;

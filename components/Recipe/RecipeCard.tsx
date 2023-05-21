@@ -7,11 +7,10 @@ import getCroppedImageUrl from "../Utils/getCroppedImageUrl";
 const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Card.Section>
+      <Card.Section pos="relative" className="h-52 lg:h-48">
         <Image
           src={getCroppedImageUrl(image as string)}
-          height={160}
-          width={320}
+          fill
           alt="Norway"
           className="object-cover"
         />
