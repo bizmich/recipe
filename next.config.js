@@ -8,7 +8,7 @@ const nextConfig = {
     domains: [
       "images.unsplash.com",
       "plus.unsplash.com",
-      "node-recipe-api-psi.vercel.app",
+      "firebasestorage.googleapis.com",
       "localhost",
     ],
   },

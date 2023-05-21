@@ -2,26 +2,25 @@ import { Recipe } from "@/types/interfaces";
 import { Button, Card, Group, List, Text } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
+import getCroppedImageUrl from "../Utils/getCroppedImageUrl";
 
 const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Card.Section component="a" href="https://mantine.dev/">
+      <Card.Section>
         <Image
-          src={`${process.env.BASE_URL}/uploads/${image}`}
+          src={getCroppedImageUrl(image as string)}
           height={160}
           width={320}
           alt="Norway"
           className="object-cover"
         />
       </Card.Section>
-
       <Group position="apart" mt="md" mb="xs">
         <Text weight={500} className="line-clamp-1">
           {name}
         </Text>
       </Group>
-
       <List size={14} className="line-clamp-4">
         {Array.isArray(ingredient) &&
           ingredient?.map((i, idx) => {

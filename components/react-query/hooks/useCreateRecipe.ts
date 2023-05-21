@@ -3,7 +3,7 @@ import APIClient from "../state-management/services/apiClient";
 
 const apiClient = new APIClient<Record<string, string>>("/api/recipe");
 
-const useCreateRecipe = () => {
+const useCreateRecipe = (onSuccess?: () => void) => {
   return useMutation({
     mutationFn: (data: FormData) =>
       apiClient.post(data, {
@@ -11,6 +11,9 @@ const useCreateRecipe = () => {
           "Content-Type": "multipart/form-data",
         },
       }),
+    onSuccess: () => {
+      if (onSuccess) onSuccess();
+    },
   });
 };
 

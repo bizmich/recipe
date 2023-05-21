@@ -1,7 +1,7 @@
 import { Recipe } from "@/types/interfaces";
 import {
   Button,
-  FileButton,
+  LoadingOverlay,
   NumberInput,
   Paper,
   TextInput,
@@ -10,15 +10,11 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconClockHour10 } from "@tabler/icons-react";
-import { useRouter } from "next/router";
-import useCreateRecipe from "../react-query/hooks/useCreateRecipe";
-import axios from "axios";
 import { UploadImage } from "../Utils/UploadImage";
+import useCreateRecipe from "../react-query/hooks/useCreateRecipe";
 
 const RecipeFrom = () => {
-  const { push } = useRouter();
-
-  const createRecipe = useCreateRecipe();
+  const createRecipe = useCreateRecipe(() => recipeFrom.reset());
 
   const recipeFrom = useForm<Recipe>({
     initialValues: {
@@ -42,19 +38,17 @@ const RecipeFrom = () => {
 
   const handleSubmit = (value: Recipe) => {
     const readyForm = new FormData();
-    if (value.image) readyForm.append("image", value.image[0]);
-    if (value.ingredient)
-      readyForm.append("ingredient", value.ingredient as string);
-    if (value.description) readyForm.append("description", value.description);
-    if (value.cookingTime)
-      readyForm.append("cookingTime", value.cookingTime.toString());
-    if (value.cookingTime) readyForm.append("name", value.name);
+    readyForm.append("image", value.image[0]);
+    readyForm.append("ingredient", value.ingredient as string);
+    readyForm.append("description", value.description);
+    readyForm.append("cookingTime", value.cookingTime.toString());
+    readyForm.append("name", value.name);
 
     createRecipe.mutate(readyForm);
   };
 
   return (
-    <Paper className="w-full py-10 lg:w-1/3" shadow="xl" p={20}>
+    <Paper className="w-full py-10 lg:w-1/3" shadow="xl" p={20} pos="relative">
       <Title align="center" order={1} size={25} mb={25}>
         Добавить блюдо
       </Title>
@@ -94,6 +88,7 @@ const RecipeFrom = () => {
           </Button>
         </div>
       </form>
+      <LoadingOverlay visible={createRecipe.isLoading} overlayBlur={2} />
     </Paper>
   );
 };

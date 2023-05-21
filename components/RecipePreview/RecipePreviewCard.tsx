@@ -2,6 +2,7 @@ import { Recipe } from "@/types/interfaces";
 import { Badge, Button, Card, Group, Image, List, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import { openModal } from "../Utils/DeleteConfirmAlert";
+import getCroppedImageUrl from "../Utils/getCroppedImageUrl";
 
 const RecipePreviewCard = ({
   data,
@@ -10,14 +11,12 @@ const RecipePreviewCard = ({
   data: Recipe;
   onDelete: (id: string) => void;
 }) => {
-  console.log("data:", data);
-
   const { push } = useRouter();
   return (
     <Card shadow="sm" maw="60%" mx="auto" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image
-          src={`${process.env.BASE_URL}/uploads/${data.image}`}
+          src={getCroppedImageUrl(data.image as string)}
           height={350}
           alt="Norway"
         />
