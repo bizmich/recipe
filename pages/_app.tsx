@@ -18,7 +18,25 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Recipe</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            components: {
+              Container: {
+                defaultProps: {
+                  sizes: {
+                    xs: 576,
+                    sm: 768,
+                    md: 1200,
+                    lg: 1320,
+                    xl: 1400,
+                  },
+                },
+              },
+            },
+          }}
+        >
           <ModalsProvider>
             <Layout>
               <Component key={asPath} {...pageProps} />

@@ -26,12 +26,12 @@ export function CardsCarousel() {
   if (isLoading) return null;
   return (
     <Carousel
-      slideSize="50%"
+      slideSize="30%"
       breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: rem(2) }]}
       slideGap="xl"
       align="start"
       loop
-      slidesToScroll={mobile ? 1 : 2}
+      slidesToScroll={mobile ? 1 : 3}
     >
       {slides}
     </Carousel>

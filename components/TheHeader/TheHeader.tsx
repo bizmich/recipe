@@ -1,8 +1,9 @@
-import { Button, Container } from "@mantine/core";
+import { Container, Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import Logo from "../Logo";
 import SearchBar from "./SearchBar/SearchBar";
+import Navigation from "./Navigation";
 
 const TheHeader = () => {
   return (
@@ -11,26 +12,11 @@ const TheHeader = () => {
         <Link href="/">
           <Logo />
         </Link>
-        {/* <nav className="flex items-center w-auto gap-x-2">
-          <Button variant="light" compact color="white">
-            Блюдо мира
-          </Button>
-          <Button variant="light" compact color="white">
-            Блюдо мира
-          </Button>
-          <Button variant="light" compact color="white">
-            Блюдо мира
-          </Button>
-          <Button variant="light" compact color="white">
-            Блюдо мира
-          </Button>
-        </nav> */}
+        <Navigation />
         <div className="flex items-center gap-x-3">
           <SearchBar />
           <Link href="/add-recipe">
-            <Button radius="xl" leftIcon={<IconPlus />}>
-              Добавить блюдо
-            </Button>
+            <Button leftIcon={<IconPlus />}>Добавить блюдо</Button>
           </Link>
         </div>
       </Container>
