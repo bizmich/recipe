@@ -15,7 +15,7 @@ const CommentsList = ({ comments }: { comments: Comment[] }) => {
       p="md"
       className="space-y-5"
     >
-      <Title order={2}>Comments</Title>
+      <Title order={2}>Комментарии</Title>
       {comments.length > 0 ? (
         comments.map((com) => {
           return (

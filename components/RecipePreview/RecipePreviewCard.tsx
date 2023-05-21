@@ -29,14 +29,14 @@ const RecipePreviewCard = ({
         <Badge>{data.createdDate}</Badge>
       </Group>
 
-      <Text weight={500}>Description</Text>
+      <Text weight={500}>Описание</Text>
 
       <Text size="sm" color="dimmed">
         {data.description}
       </Text>
 
       <Text weight={500} mt={15}>
-        Ingredients
+        Ингридиенты
       </Text>
       <List size={14} withPadding>
         {Array.isArray(data.ingredient) &&
@@ -44,6 +44,9 @@ const RecipePreviewCard = ({
             return <List.Item key={i}>{i}</List.Item>;
           })}
       </List>
+      <Text color="dimmed" align="right">
+        Просмотры: {data.viewCount}
+      </Text>
 
       <Button
         variant="light"
@@ -53,7 +56,7 @@ const RecipePreviewCard = ({
         mt="md"
         radius="md"
       >
-        Edit
+        Редактировать
       </Button>
       <Button
         variant="filled"
@@ -67,7 +70,7 @@ const RecipePreviewCard = ({
         mt="md"
         radius="md"
       >
-        Delete
+        Удалить
       </Button>
     </Card>
   );

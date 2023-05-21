@@ -25,31 +25,31 @@ const CommentForm = ({ id }: { id: string | undefined }) => {
       >
         <TextInput
           required
-          placeholder="Your name"
+          placeholder="Ваше имя"
           {...form.getInputProps("name")}
-          label="Full name"
+          label="Ваше имя"
           withAsterisk
         />
 
         <TextInput
           required
-          placeholder="Your email"
+          placeholder="Ваша почта"
           type="email"
-          label="Email"
+          label="Почта"
           withAsterisk
           {...form.getInputProps("email")}
         />
 
         <Textarea
           required
-          label="Comment"
-          placeholder="Add a comment"
+          label="Комментарии"
+          placeholder="Добавить комментарии"
           withAsterisk
           {...form.getInputProps("comment")}
         />
         <div className="flex justify-end mt-5 gap-x-3">
           <Button loading={createComment.isLoading} type="submit">
-            Submit
+            Добавить
           </Button>
         </div>
       </form>

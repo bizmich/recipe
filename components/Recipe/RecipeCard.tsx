@@ -20,7 +20,7 @@ const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
           {name}
         </Text>
       </Group>
-      <List size={14} className="h-24 line-clamp-4">
+      <List size={14} className="h-32 truncate whitespace-nowrap line-clamp-4">
         {Array.isArray(ingredient) &&
           ingredient?.map((i, idx) => {
             return <List.Item key={idx}>{i}</List.Item>;
@@ -28,7 +28,7 @@ const RecipeCard = ({ name, ingredient, id, image }: Partial<Recipe>) => {
       </List>
       <Link href={`/recipe-preview/${id}`} className="no-underline">
         <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-          Preview
+          Просмотр
         </Button>
       </Link>
     </Card>

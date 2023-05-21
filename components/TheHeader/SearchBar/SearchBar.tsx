@@ -17,7 +17,7 @@ function SpotlightControl() {
 
 const SearchBar = () => {
   const { push } = useRouter();
-  const { data: recipes, isLoading } = useRecipeList();
+  const { data: recipes } = useRecipeList();
 
   const [data, setData] = useState<SpotlightAction[]>([]);
 
@@ -42,6 +42,7 @@ const SearchBar = () => {
       searchPlaceholder="Поиск..."
       shortcut="mod + shift + 1"
       nothingFoundMessage="Ничего не найдено..."
+      className="line-clamp-1"
     >
       <SpotlightControl />
     </SpotlightProvider>

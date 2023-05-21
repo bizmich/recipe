@@ -97,7 +97,10 @@ export function CarouselCard({
           </Text>
 
           <Group position="apart" spacing="xs">
-            <Text size="sm" className={classes.ingredients}>
+            <Text
+              size="sm"
+              className={`line-clamp-1 w-1/2 ${classes.ingredients}`}
+            >
               {ingredients.map((com) => {
                 return <span key={com}>{com}</span>;
               })}
