@@ -16,7 +16,9 @@ const TheHeader = () => {
         <div className="flex items-center gap-x-3">
           <SearchBar />
           <Link href="/add-recipe">
-            <Button leftIcon={<IconPlus />}>Добавить блюдо</Button>
+            <Button leftIcon={<IconPlus />} radius="xl">
+              Добавить блюдо
+            </Button>
           </Link>
         </div>
       </Container>

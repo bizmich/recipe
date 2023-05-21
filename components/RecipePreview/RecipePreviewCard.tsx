@@ -3,6 +3,7 @@ import { Badge, Button, Card, Group, Image, List, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import { openModal } from "../Utils/DeleteConfirmAlert";
 import getCroppedImageUrl from "../Utils/getCroppedImageUrl";
+import { intlFormatDistance } from "date-fns";
 
 const RecipePreviewCard = ({
   data,
@@ -26,7 +27,12 @@ const RecipePreviewCard = ({
         <Text size="lg" weight={500}>
           {data.name as string}
         </Text>
-        <Badge>{data.createdDate}</Badge>
+        <Badge>
+          {data.createdDate &&
+            intlFormatDistance(new Date(data.createdDate), Date.now(), {
+              locale: "ru",
+            })}
+        </Badge>
       </Group>
 
       <Text weight={500}>Описание</Text>

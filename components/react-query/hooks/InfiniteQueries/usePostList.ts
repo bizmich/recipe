@@ -5,8 +5,14 @@ interface PageQuery {
   pageSize: number;
 }
 
+interface Post {
+  id: number;
+  body: string;
+  title: string;
+}
+
 const usePostList = (query: PageQuery) => {
-  return useInfiniteQuery({
+  return useInfiniteQuery<Post[], Error>({
     queryKey: ["posts"],
     queryFn: ({ pageParam = 1 }) =>
       axios

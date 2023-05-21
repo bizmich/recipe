@@ -1,3 +1,5 @@
+import { FileWithPath } from "@mantine/dropzone";
+
 export interface FetchResponse<T> {
   list: T[];
   count: number;
@@ -6,7 +8,7 @@ export interface FetchResponse<T> {
 export interface Recipe {
   description: string;
   createdDate?: string;
-  image: Blob | string;
+  image: FileWithPath[] | string;
   ingredient?: string[] | string;
   name: string;
   cookingTime: number;

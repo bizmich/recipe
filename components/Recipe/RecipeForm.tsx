@@ -10,9 +10,11 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconCircleCheckFilled, IconClockHour10 } from "@tabler/icons-react";
-import { UploadImage } from "../Utils/UploadImage";
+
 import useCreateRecipe from "../react-query/hooks/useCreateRecipe";
 import { notifications } from "@mantine/notifications";
+import UploadImage from "../Utils/UploadImage";
+import { useRouter } from "next/router";
 
 const RecipeFrom = () => {
   const createRecipe = useCreateRecipe(() => {
@@ -31,7 +33,7 @@ const RecipeFrom = () => {
       cookingTime: 0,
       name: "",
       ingredient: [],
-      image: "",
+      image: [],
     },
     validate: {
       name: (value) => (value !== "" ? null : "Пожалуйста введите имя"),
@@ -47,7 +49,7 @@ const RecipeFrom = () => {
 
   const handleSubmit = (value: Recipe) => {
     const readyForm = new FormData();
-    readyForm.append("image", value.image);
+    readyForm.append("image", value.image[0]);
     readyForm.append("ingredient", value.ingredient as string);
     readyForm.append("description", value.description);
     readyForm.append("cookingTime", value.cookingTime.toString());

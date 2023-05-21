@@ -8,11 +8,12 @@ import { useState } from "react";
 import { SortableItem } from "@/components/DragNDrop/SortableItem";
 import { Container } from "@mantine/core";
 
-function DrangAndDrop() {
+const DragAndDrop = () => {
   const [languages, setLanguages] = useState<string[]>([
-    "JavaScript",
-    "Python",
+    "Mantine UI",
+    "Next JS",
     "TypeScript",
+    "Tailwind",
   ]);
 
   return (
@@ -38,11 +39,10 @@ function DrangAndDrop() {
       setLanguages((items) => {
         const activeIndex = items.indexOf(active.id.toString());
         const overIndex = items.indexOf(over.id.toString());
-        console.log(arrayMove(items, activeIndex, overIndex));
         return arrayMove(items, activeIndex, overIndex);
       });
     }
   }
-}
+};
 
-export default DrangAndDrop;
+export default DragAndDrop;
