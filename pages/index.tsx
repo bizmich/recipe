@@ -7,7 +7,7 @@ import { Container, Title } from "@mantine/core";
 const Home = () => {
   return (
     <Container py={50}>
-      <Title order={2}>Популярные блюдо</Title>
+      <Title order={2}>Популярные блюда</Title>
       <div className="my-10">
         <CardsCarousel />
       </div>
